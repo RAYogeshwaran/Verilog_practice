@@ -1,0 +1,16 @@
+// Code your design here
+//3 bit counter using behavioral modelling
+
+module day2(out,clock,reset);
+  output reg [2:0] out;
+ // input [2:0] in;
+  input clock,reset;
+  
+  always@(posedge clock) // synchronous reset
+  begin
+    if(reset == 1'b1) // active high reset
+      out <= 3'b000;
+    else 
+      out <= out + 1;
+  end
+endmodule
