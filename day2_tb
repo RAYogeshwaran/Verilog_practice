@@ -1,0 +1,29 @@
+// Code your testbench here
+// or browse Examples
+
+module day2_tb();
+  reg clock,reset;
+  wire [2:0] out;
+  
+  day2 DUT(out,clock,reset);
+  
+  initial 
+    begin
+      reset <= 1'b1;
+      #10 reset <= 1'b0;
+    end
+  initial
+    begin
+      clock <= 1'b0;
+      forever
+      		#5 clock <= ~ clock;
+    end
+  initial 
+    begin
+      $monitor("count is %d",out);
+      #200 $finish;
+    end
+endmodule
+ 
+  
+  
