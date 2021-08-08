@@ -1,0 +1,31 @@
+// Code your testbench here
+// or browse Examples
+module day3_tb();
+  wire [3:0] out;
+  reg [1:0] sel;
+  reg in;
+  integer i,j;
+  day3 DUT(in,out,sel);
+  initial 
+    begin
+       $monitor(in,sel,out);
+      for(i = 0;i<4;i=i+1)
+        begin
+          for(j=0;j<2;j =j+1)
+          begin
+            sel = i;
+            in = j;
+            #5;
+          end
+          end
+      
+       $finish;
+    end
+ 
+    initial begin
+     
+  $dumpfile("dump.vcd");
+  $dumpvars(1);
+end
+  
+endmodule
