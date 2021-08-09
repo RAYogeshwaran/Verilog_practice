@@ -1,0 +1,33 @@
+// Code your testbench here
+// or browse Examples
+module day_4_tb_counter_mod_7_async();
+reg clock, reset;
+wire [2:0] out;
+
+day_4_counter_mod_7_async DUT(clock,reset,out);
+initial 
+begin
+clock=1'b1;				
+forever
+#5 clock = ~clock;  
+end
+
+//initial
+//begin
+//$monitor("out and is %b",((out[0]&out[1])&out[2]));
+//end
+initial 
+  begin
+    $dumpfile("dump.vcd");
+    $dumpvars(0);
+  end
+initial 
+begin
+reset=1'b1;
+#10 reset=1'b0; // check for #10 reset<=1'b0;  on diff. line  
+//#100 reset = 1'b1;
+//#50 reset =1'b0;
+$monitor("THE PRESENT COUNT IS %d", out);
+#200 $finish;
+end
+endmodule
