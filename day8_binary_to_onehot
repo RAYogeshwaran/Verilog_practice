@@ -1,0 +1,32 @@
+// Code your design here
+// binary to one-hot 
+// 4 bit binary input
+// 16 bit output 
+module day8_b_to_onehot(in,out);
+  input [3:0] in;
+  output reg [15:0] out;
+  //integer i;
+  always@(*)
+   begin
+     case(in)
+       4'd0 : out <= 16'd1;
+       4'd1 : out <= 16'd2;
+       4'd2 : out <= 16'd4;
+       4'd3 : out <= 16'd8;
+       4'd4 : out <= 16'd16;
+       4'd5 : out <= 16'd32;
+       4'd6 : out <= 16'd64;
+       4'd7 : out <= 16'd128;
+       4'd8 : out <= 16'd256;
+       4'd9 : out <= 16'd512;
+       4'd10 : out <= 16'd1024;
+       4'd11 : out <= 16'd2048;
+       4'd12 : out <= 16'd4096;
+       4'd13 : out <= 16'd8192;
+       4'd14 : out <= 16'd16384;
+       4'd15 : out <= 16'd32768;
+       default : out <= 16'd0;
+     endcase
+   end
+  endmodule
+  
