@@ -1,0 +1,23 @@
+// Code your testbench here
+// or browse Examples
+module tb_day8();
+  reg [3:0] in;
+  wire [15:0] out;
+  
+  day8_b_to_onehot DUT(in,out);
+  initial
+    begin
+      $monitor(out);
+      #5 in = 4'd2;
+      #5 in = 4'd6;
+      #5 in = 4'd10;
+      #5 in = 4'd0;
+      $finish;
+    end
+  initial
+    begin
+    $dumpfile("dump.vcd");
+    $dumpvars(0);
+  end
+endmodule
+  
