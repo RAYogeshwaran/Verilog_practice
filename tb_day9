@@ -1,0 +1,25 @@
+// Code your testbench here
+// or browse Examples
+module tb_day9();
+  reg [3:0] in1,in2;
+  reg sub;
+  wire [3:0] out;
+  
+  day9_add_and_sub DUT(in1,in2,out,sub);
+  
+  always 
+    begin
+      $monitor(in1,in2,sub,out);
+      in1 = {$random} % 16;
+      in2 = {$random} % 16;
+      sub = {$random} % 2;
+      #5;
+    end
+  initial 
+    begin
+      $dumpfile("dump.vcd");
+      $dumpvars(0);
+      #100 $finish;
+    end
+endmodule
+  
