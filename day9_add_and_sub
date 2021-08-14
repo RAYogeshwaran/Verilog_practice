@@ -1,0 +1,28 @@
+// Code your design here
+// 4 bit adder and subtractor
+
+
+module day9_add_and_sub(in1,in2,out,sub);
+  input [3:0] in1,in2;
+  input sub; 
+  // sub = 1 => subtraction
+  // sub = 0 => addition
+  output [3:0] out;
+  wire [3:0] carry_out;
+  wire [3:0] in2_comp;
+  
+  assign in2_comp = in2^{sub,sub,sub,sub};
+  fulladder A0(in1[0],in2_comp[0],sub,out[0],carry_out[0]);
+  fulladder A1(in1[1],in2_comp[1],carry_out[0],out[1],carry_out[1]);
+  fulladder A2(in1[2],in2_comp[2],carry_out[1],out[2],carry_out[2]);
+  fulladder A3(in1[3],in2_comp[3],carry_out[2],out[3],carry_out[3]);
+endmodule
+
+module fulladder(a,b,c,sum,cout);
+  input a,b,c;
+  output sum,cout;
+  
+  assign sum = a^b^c;
+  assign cout = (a&b)|(b&c)|(a&c);
+  
+endmodule
