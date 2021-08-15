@@ -1,0 +1,22 @@
+// Code your testbench here
+// or browse Examples
+module tb_day10();
+  reg [3:0] in;
+  reg reset;
+  wire [3:0] out;
+  
+  day10_binary_gray DUT(in,out);
+  initial
+    begin
+      in = {$random} % 16;
+      #5 in = {$random} % 16;
+      #5 in = {$random} % 16;
+      #5 in = {$random} % 16;
+      #10 $finish;
+    end
+  initial
+    begin
+       $dumpfile("dump.vcd"); 
+       $dumpvars(1);
+    end
+endmodule
