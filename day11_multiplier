@@ -1,0 +1,34 @@
+// Code your design here
+// 4 * 4 multiplier 
+// based on block diagram drawn in class
+module day11_multiplier(C,A,M,Q,Out);
+  input C;	
+  input [3:0] A,Q,M;
+  output [7:0] Out; 
+  integer j;
+  reg [3:0] a,q,m;
+  reg c;
+  always@(Q , M)
+    begin
+      a = A;
+      q = Q;
+      m = M;
+      c = C;
+      for(j = 3; j >=0 ; j =j-1 )
+        begin
+       
+      if(q[0] == 1'b1)
+        begin
+          {c,a} = a + m;
+          {c,a,q} = {c,a,q} >> 1;
+          
+        end
+      else 
+        begin
+          {c,a,q} = {c,a,q} >> 1;
+          
+        end
+        end 	
+    end
+  assign Out = (j==-1) ? {a,q} : 0;
+endmodule
