@@ -1,0 +1,29 @@
+// Code your testbench here
+// or browse Examples
+module tb_day12();
+  reg [1:0] a,b;
+  wire a_less_b,a_greater_b,a_equal_b;
+  integer i,j;
+  wire temp;
+  assign temp = a_less_b? a_less_b : ((a_greater_b) ? a_greater_b                   : a_equal_b);
+  day12 DUT(a,b,a_less_b,a_greater_b,a_equal_b);
+       initial
+         begin
+           $monitor("a = %b, b = %b, out = %b",a,b,temp); // temp is not needed
+           for(i=0;i<4;i=i+1)
+             begin
+               for(j=0;j<4;j=j+1)
+                 begin
+                   a <= i;
+                   b <= j;
+              	   #5;
+                 end
+             end
+           end
+  initial
+    begin
+      $dumpfile("dump.vcd");
+      $dumpvars(1);
+    end
+           
+            endmodule
