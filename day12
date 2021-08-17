@@ -1,0 +1,27 @@
+// Code your design here
+// 2 bit comparator 
+module day12(a,b,a_less_b,a_greater_b,a_equal_b);
+  input [1:0] a,b;
+  output reg a_less_b,a_greater_b,a_equal_b;
+  always@(*)
+    begin
+      if(a>b)
+        begin
+          a_less_b <= 1'b0;
+          a_greater_b <= 1'b1;
+          a_equal_b <= 1'b0;
+        end
+      else if(a<b)
+        begin
+          a_less_b <= 1'b1;
+          a_greater_b <= 1'b0;
+          a_equal_b <= 1'b0;
+        end
+      else
+        begin
+          a_less_b <= 1'b0;
+          a_greater_b <= 1'b0;
+          a_equal_b <= 1'b1;
+        end
+    end
+endmodule
