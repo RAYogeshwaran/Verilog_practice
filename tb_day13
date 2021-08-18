@@ -1,0 +1,22 @@
+// Code your testbench here
+// or browse Examples
+module tb_day13();
+  reg Q_1;
+  reg [3:0] A,Q,M;
+  wire [7:0] Out;
+  day13 DUT(A,M,Q,Q_1,Out);
+  initial
+    begin
+      $monitor("out = %b",Out);
+      Q_1 <= 0;
+      A <= 4'b0000; 
+      Q <= 4'b0101; // -5
+      M <= 4'b0010; // 5
+       #100 $finish;
+    end
+  initial
+    begin
+      $dumpfile("dump.vcd"); 
+      $dumpvars(0);
+    end
+endmodule
