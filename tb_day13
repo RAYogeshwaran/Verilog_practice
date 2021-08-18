@@ -7,15 +7,15 @@ module tb_day13();
   day13 DUT(A,M,Q,Q_1,Out);
   initial
     begin
-      $monitor("out = %b",Out);
-      Q_1 <= 0;
       A <= 4'b0000; 
-      Q <= 4'b0101; // -5
-      M <= 4'b0010; // 5
+      Q <= 4'b0100; // 4 
+      M <= 4'b1101; //  -3
+       Q_1 <= 1'b0;
        #100 $finish;
     end
   initial
     begin
+      $monitor("out = %b",Out);
       $dumpfile("dump.vcd"); 
       $dumpvars(0);
     end
