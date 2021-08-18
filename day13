@@ -6,35 +6,36 @@ module day13(A,M,Q,Q_1,Out);
   input [3:0] A,Q,M;
   output [7:0] Out; 
   integer j;
-  reg [3:0] a,q,m; // m is the negative number
+  reg [3:0] a,q,m; //  
   reg q_1;
-  always@(Q , M)
+  reg temp;
+  always@(*)
     begin
-      a <= A;
-      q <= Q;
-      m <= M;
-      q_1 <= Q_1;
-      for(j = 4; j >=0 ; j =j-1 )
+      a = A;
+      q = Q;
+      m = M;
+      q_1 = Q_1;
+      for(j = 3; j >=0 ; j =j-1 )
         begin
-       
-          if({q[0],q_1}== 2'b01)
-        begin
-          a = a + m;
-          {a,q,q_1} = {a,q,q_1} >>> 1;
+          case({q[0],q_1})//if({q[0],q_1} == 2'b0_1)
+        2'b0_1 : begin
+          {temp,a} = a + m;
+          {a,q,q_1} = $signed({a,q,q_1}) >>> 1'b1;
           
         end
-          else if({q[0],q_1}== 2'b10)
+         2'b1_0 :  ///else if({q[0],q_1}== 2'b1_0)
         begin
-          a = a + (~m+1);
-          {a,q,q_1} = {a,q,q_1} >>> 1;
+          {temp,a} = a + ((~m)+1);
+          {a,q,q_1} = $signed({a,q,q_1}) >>> 1'b1;
           
         end
-          else if({q[0],q_1}== 2'b00 | {q[0],q_1}== 2'b11)
+         default : //else if({q[0],q_1}== 2'b0_0 | {q[0],q_1}== 2'b1_1)
         begin
-          {a,q,q_1} = {a,q,q_1} >>> 1;
+          {a,q,q_1} = $signed({a,q,q_1}) >>> 1'b1;
           
         end
+          endcase
         end 	
     end
-  assign Out = (j==-1) ? {a,q} : 0;
+  assign Out = {a,q};
 endmodule
