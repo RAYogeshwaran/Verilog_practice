@@ -1,0 +1,37 @@
+module tb_day15();
+  reg s,r,clk;
+  wire q,qc;
+  day15 DUT(s,r,clk,q,qc);
+  always
+    begin
+     #2 clk = ~clk;
+    end
+  initial
+    begin
+      $monitor("Q = %b, Qbar = %b",q,qc);
+      clk = 1'b0;
+      s = 1; 
+      r = 0; 
+      #5;
+      s = 0; 
+      r = 1; 
+      #5;
+      s = 1; 
+      r = 1; 
+      #5;
+      s = 1; 
+      r = 0; 
+      #5;
+      s = 0; 
+      r = 0; 
+      #5;
+      s = 1; 
+      r = 0; 
+      #5 $finish;
+    end
+  initial 
+    begin
+      $dumpfile("dump.vcd");
+      $dumpvars(0);
+    end
+endmodule
