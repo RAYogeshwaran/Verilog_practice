@@ -1,0 +1,34 @@
+module decoder3X8(y,d,e);
+  input [2:0] d;
+  input e;
+  output [7:0] y;
+  reg [7:0] y;
+ 
+  always@(d or e) 
+  begin
+  if(e == 1)
+    begin
+      case(d)
+        3'b000:y=8'b00000001;
+        3'b001:y=8'b00000010;
+        3'b010:y=8'b00000100;
+        3'b011:y=8'b00001000;
+        3'b100:y=8'b00010000;
+        3'b101:y=8'b00100000;
+        3'b110:y=8'b01000000;
+        3'b111:y=8'b10000000;
+        default:y=8'b00000000;
+      endcase
+    end
+  if(e == 0)
+    y=8'b00000000; 
+    end
+endmodule   
+// dec_4X16_3X8
+module day16(y,d);
+  input [3:0] d;
+  output [15:0] y;
+    decoder3X8 g1(y[7:0],d[2:0],~(d[3]));
+    decoder3X8 g2(y[15:8],d[2:0],d[3]);
+endmodule
+
