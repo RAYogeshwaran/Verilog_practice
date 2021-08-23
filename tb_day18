@@ -1,0 +1,28 @@
+module tb_updown4bitcounter();
+  reg clock,reset,up,down,load;
+  reg [3:0] in;
+  wire [3:0] q;
+  updown4bitcounter DUT(.q(q),.up(up),.down(down),.load(load),.clk(clock),.reset(reset),.in(in));
+  always
+    begin
+     #1 clock = ~clock;
+    end
+  initial
+    begin
+      clock = 0;
+    reset = 1'b1;
+      #3 reset = 1'b0;
+      load = 1;
+      in = 3;
+      load = 0;
+      #1 up = 1;
+      #10 up = 0;
+      #10 down = 1; 
+      #10 $finish;
+    end
+      initial
+        begin
+          $dumpfile("dump.vcd");
+          $dumpvars(1);
+        end
+      endmodule
