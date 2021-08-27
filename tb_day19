@@ -1,0 +1,22 @@
+module tb_frequency_divider();
+  reg clk_in;
+  wire clk_out; 
+  frequency_divider DUT(clk_in,clk_out);
+  initial
+    fork
+      clk_in = 1'b0;
+      forever 
+        begin
+        #2 clk_in = ~ clk_in;
+        end
+      #100 $finish;
+
+      join
+  initial
+    begin
+      
+      $dumpfile("dump.vcd");
+      $dumpvars(1);
+      
+    end
+endmodule
