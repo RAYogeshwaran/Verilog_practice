@@ -1,0 +1,25 @@
+module frequency_divider(clk_in,clk_out);
+  input clk_in;
+  output reg clk_out;
+  reg [7:0] counter = 8'b0; // valid upto divider by 8
+  parameter divisor = 8'd6;
+  
+  always@(posedge clk_in)
+    begin
+      if(counter == divisor - 1)
+        counter <=8'b0;
+      else
+        begin
+          if(counter < divisor / 2)
+            begin
+            clk_out <= 1'b1;
+          counter <= counter + 1; 
+            end
+          else
+            begin
+            clk_out <= 1'b0;
+          counter <= counter + 1;
+            end
+        end
+    end
+endmodule
